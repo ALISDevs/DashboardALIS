@@ -1,0 +1,192 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum UserRole {
+  ADMIN
+  MEMBER
+}
+
+enum ProjectStatus {
+  PLANNING
+  ACTIVE
+  ON_HOLD
+  COMPLETED
+}
+
+enum TicketStatus {
+  NEW
+  IN_PROGRESS
+  RESOLVED
+}
+
+enum TicketPriority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+model User {
+  id              String    @id @default(cuid())
+  name            String
+  email           String    @unique
+  username        String?   @unique
+  role            UserRole  @default(MEMBER)
+  passwordHash    String?
+  sessions        Session[]
+  activities      Activity[]
+  documents       Document[]
+  memberships     ProjectMember[]
+  createdProjects Project[] @relation("ProjectCreator")
+  assignedTickets Ticket[]  @relation("AssignedTickets")
+  comments        Comment[] @relation("UserComments")
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model Client {
+  id        String    @id @default(cuid())
+  name      String
+  email     String    @unique
+  company   String
+  createdById String?
+  projects  Project[]
+  comments  Comment[] @relation("ClientComments")
+  termsAccepted   Boolean @default(false)
+  termsAcceptedAt DateTime?
+  termsVersion    String?
+  acceptances     TermsAcceptance[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Project {
+  id          String        @id @default(cuid())
+  name        String
+  description String?
+  accessToken String        @unique @default(cuid())
+  status      ProjectStatus @default(PLANNING)
+  createdById String?
+  createdBy User? @relation("ProjectCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  clientId    String
+  client      Client        @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  tickets     Ticket[]
+  documents   Document[]
+  activities  Activity[]
+  members     ProjectMember[]
+  acceptances TermsAcceptance[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([clientId])
+}
+
+model ProjectMember {
+  projectId String
+  userId    String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@id([projectId, userId])
+  @@index([userId])
+}
+
+model TermsAcceptance {
+  id           String @id @default(cuid())
+  clientId     String
+  client       Client @relation(fields: [clientId], references: [id])
+  projectId    String?
+  project      Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  termsVersion String
+  termsHash    String
+  acceptedAt   DateTime @default(now())
+  method       String @default("PROJECT_ACCESS_LINK")
+
+  @@index([clientId, acceptedAt])
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  tokenHash String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model Document {
+  id         String   @id @default(cuid())
+  title      String
+  content    String   @default("")
+  projectId  String
+  project    Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  authorId   String
+  author     User     @relation(fields: [authorId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([projectId])
+}
+
+model Activity {
+  id        String   @id @default(cuid())
+  action    String
+  summary   String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@index([projectId, createdAt])
+}
+
+model Ticket {
+  id                  String         @id @default(cuid())
+  title               String
+  description         String?
+  category            String?
+  status              TicketStatus   @default(NEW)
+  priority            TicketPriority @default(MEDIUM)
+  isVisibleToClient   Boolean        @default(false)
+  projectId           String
+  project             Project        @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  assignedUserId      String?
+  assignedUser        User?          @relation("AssignedTickets", fields: [assignedUserId], references: [id], onDelete: SetNull)
+  comments            Comment[]
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @updatedAt
+
+  @@index([projectId])
+  @@index([assignedUserId])
+  @@index([isVisibleToClient])
+}
+
+model Comment {
+  id                  String   @id @default(cuid())
+  body                String
+  isMilestoneFeedback Boolean  @default(false)
+  ticketId            String
+  ticket              Ticket   @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  userId              String?
+  user                User?    @relation("UserComments", fields: [userId], references: [id], onDelete: SetNull)
+  clientId            String?
+  client              Client?  @relation("ClientComments", fields: [clientId], references: [id], onDelete: SetNull)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@index([ticketId])
+  @@index([userId])
+  @@index([clientId])
+}
