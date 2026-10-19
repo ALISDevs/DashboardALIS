@@ -20,3 +20,6 @@ coverage/
 backend/generated/
 .DS_Store
 Thumbs.db
+DESIGN-SYSTEM.md
+SECURITY-AUDIT.md
+QA-INTEGRATION.md
