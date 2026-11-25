@@ -1,0 +1,41 @@
+
+.rich-text {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 450;
+  line-height: 1.8;
+  letter-spacing: normal;
+  color: #c4c4ce;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+.rich-text > :first-child { margin-top: 0; }
+.rich-text > :last-child { margin-bottom: 0; }
+.rich-text p { margin: 0 0 0.85em; }
+.rich-text :is(h1, h2, h3, h4, h5, h6) { color: #ededf1; font-weight: 650; line-height: 1.5; letter-spacing: -0.015em; margin: 1.2em 0 0.45em; }
+.rich-text :is(h1, h2) { font-size: 1.15rem; }
+.rich-text h3 { font-size: 1.0625rem; }
+.rich-text :is(h4, h5, h6) { font-size: 1rem; }
+.rich-text strong { font-weight: 700; color: #ededf1; }
+.rich-text em { font-style: italic; }
+.rich-text ul, .rich-text ol { margin: 0.6em 0 1em; padding-left: 1.5em; }
+.rich-text ul { list-style: disc; }
+.rich-text ol { list-style: decimal; }
+.rich-text li { margin: 0.25em 0; padding-left: 0.15em; }
+.rich-text li > p { margin: 0.3em 0; }
+.rich-text .contains-task-list { list-style: none; padding-left: 0.15em; }
+.rich-text .task-list-item { display: list-item; }
+.rich-text input[type="checkbox"] { accent-color: #ff9a6c; width: 14px; height: 14px; margin-right: 0.5em; vertical-align: middle; }
+.rich-text a { color: #ffc19f; text-decoration: underline; text-underline-offset: 3px; }
+.rich-text blockquote { border-left: 2px solid #e29d7850; padding-left: 1em; margin: 1em 0; color: #b6b6c2; }
+.rich-text code { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: 0.88em; background: #ffffff08; padding: 0.1em 0.35em; border-radius: 4px; }
+.rich-text pre { overflow-x: auto; padding: 1em; margin: 1em 0; border-radius: 10px; background: #08080a; border: 1px solid #ffffff0c; }
+.rich-text pre code { display: block; padding: 0; background: none; white-space: pre; font-size: 0.8125rem; }
+.rich-text table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; margin: 1em 0; }
+.rich-text th, .rich-text td { border: 1px solid #ffffff15; padding: 0.5em 0.75em; text-align: left; }
+.rich-text th { font-weight: 650; color: #ececf0; }
+.rich-text hr { border: 0; border-top: 1px solid #ffffff12; margin: 1.2em 0; }
+.comment-body.rich-text { font-size: 0.875rem; line-height: 1.8; margin-top: 0.35rem; }
+.comment-body.rich-text p { font: inherit; color: inherit; }
+.comment-body.rich-text :is(h1, h2, h3, h4, h5, h6) { font-size: 0.9375rem; }

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { RichText } from '../../../shared/ui/RichText.jsx';
 
 const initialForm = {
   clientName: '',
@@ -11,15 +12,15 @@ const initialForm = {
   initialVisible: false
 };
 
-const projectDescriptionTemplate = `# Resumen del Proyecto
+const projectDescriptionTemplate = `Resumen del proyecto
 Desarrollo de plataforma web a medida para la gestión de operaciones internas.
 
-## Alcance Inicial
-- [ ] Módulo de autenticación y roles de usuario.
-- [ ] Panel de administración con métricas clave.
-- [ ] Integración de pasarela de pagos.
+Alcance inicial
+• Módulo de autenticación y roles de usuario.
+• Panel de administración con métricas clave.
+• Integración de pasarela de pagos.
 
-## Observaciones
+Observaciones
 Entregas parciales cada dos semanas para revisión del cliente.`;
 
 export function NewProjectModal({ isOpen, users = [], onClose, onCreate }) {
@@ -124,13 +125,14 @@ export function NewProjectModal({ isOpen, users = [], onClose, onCreate }) {
               name="description"
               value={form.description}
               onChange={updateField}
-              placeholder={'Ej. # Resumen del Proyecto\n- Módulo de autenticación\n- Panel de métricas'}
+              placeholder={'Describe el objetivo del proyecto, sus funcionalidades y las entregas esperadas.'}
               rows="8"
             />
             <aside className="markdown-guide">
-              <strong>Guía Markdown</strong>
-              <p>Usa <code>#</code> y <code>##</code> para secciones, y listas con <code>-</code> o <code>- [ ]</code> para requisitos iniciales.</p>
+              <strong>Una descripción clara</strong>
+              <p>Incluye el objetivo, el alcance inicial y las observaciones para el equipo. Puedes escribir texto normal o usar formato Markdown.</p>
             </aside>
+            {form.description.trim() && <section className="description-preview" aria-label="Vista previa de la descripción"><p className="preview-label">Vista previa</p><RichText>{form.description}</RichText></section>}
           </div>
           <fieldset className="initial-tickets">
             <legend>Tickets iniciales (opcional)</legend>

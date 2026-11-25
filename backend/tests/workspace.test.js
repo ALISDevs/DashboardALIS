@@ -76,6 +76,13 @@ test('roles, tareas, documentos y eliminación de proyectos', async (t) => {
     assert.equal(result.payload.data.user.id, admin.id);
     assert.equal(result.payload.data.user.username, admin.username);
     assert.equal(result.payload.data.token, undefined);
+    const emailLogin = await call('/auth/login', { method: 'POST', body: { identifier: admin.email.toUpperCase(), password } });
+    assert.equal(emailLogin.status, 200);
+    assert.equal(emailLogin.payload.data.user.id, admin.id);
+    await assert.rejects(() => prisma.$transaction(async (db) => {
+      await db.user.create({ data: { name: 'Duplicado', email: admin.email.toUpperCase(), role: 'MEMBER' } });
+      throw new Error('Se permitió un correo duplicado por capitalización.');
+    }), (error) => error.code === 'P2002');
     assert.equal((await call('/auth/login', { method: 'POST', body: { identifier: member.username, password: 'incorrecta' } })).status, 401);
     assert.equal((await call('/auth/login', { method: 'POST', body: { identifier: { username: admin.username }, password } })).status, 400);
   });

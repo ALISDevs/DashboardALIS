@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { ShieldCheck, ArrowRight } from 'lucide-react';
 import { Brand } from '../../shared/ui/Brand.jsx';
+import { RichText } from '../../shared/ui/RichText.jsx';
 
 export function TermsModal({ terms, onAccept }) {
   const dialogRef = useRef(null);
@@ -38,7 +39,7 @@ export function TermsModal({ terms, onAccept }) {
     <Brand caption="Client portal" />
     <p className="eyebrow">UN ESPACIO DE CONFIANZA</p><h1 id="terms-title">Términos y Privacidad</h1><p className="terms-version"><ShieldCheck size={13} aria-hidden="true" />Versión {terms.version}</p>
     <p>Lee las condiciones de acceso antes de consultar los avances del proyecto.</p>
-    <pre className="terms-content" tabIndex={0}>{terms.content}</pre>
+    <div className="terms-content" tabIndex={0} role="region" aria-label="Condiciones de acceso y privacidad"><RichText headingOffset={1}>{terms.content}</RichText></div>
     <form onSubmit={submit}><label className="terms-checkbox"><input type="checkbox" checked={checked} disabled={pending} onChange={(event) => setChecked(event.target.checked)} />He leído y acepto las condiciones de acceso y privacidad.</label>
       {error && <p className="form-error" role="alert">{error}</p>}
       <button className="primary-button" disabled={!checked || pending}>{pending ? 'Registrando aceptación...' : 'Aceptar y continuar'}<ArrowRight size={16} aria-hidden="true" /></button>

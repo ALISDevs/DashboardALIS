@@ -1,0 +1,74 @@
+.root { -fx-font-family: "Segoe UI"; -fx-font-size: 13px; -fx-background-color: #f3f5f8; -fx-text-fill: #172b43; }
+.label { -fx-text-fill: #26394d; }
+.sidebar { -fx-background-color: #15389e; -fx-padding: 30 18 24 18; }
+.brand-logo { -fx-background-color: white; -fx-padding: 7 8; -fx-background-radius: 9; }
+.brand-name { -fx-text-fill: #ffffff; -fx-font-size: 20px; -fx-font-weight: bold; -fx-padding: 12 8 22 8; }
+.sidebar-caption { -fx-text-fill: #a9b9c9; -fx-font-size: 10px; -fx-font-weight: bold; -fx-padding: 0 10 10 10; }
+.button { -fx-background-color: white; -fx-text-fill: #24425d; -fx-background-radius: 7; -fx-border-color: #d5dfe8; -fx-border-radius: 7; -fx-padding: 9 14; -fx-cursor: hand; }
+.button:hover { -fx-background-color: #e8eef4; }
+.button:focused { -fx-border-color: #2854d1; -fx-border-width: 2; -fx-border-insets: -1; }
+.primary-button { -fx-background-color: #234bc0; -fx-text-fill: white; -fx-border-color: transparent; -fx-font-weight: bold; }
+.primary-button:hover { -fx-background-color: #193ba4; }
+.nav-button { -fx-background-color: transparent; -fx-border-color: transparent; -fx-text-fill: #d5e1ec; -fx-alignment: CENTER_LEFT; -fx-padding: 12 14; -fx-font-size: 14px; }
+.nav-button:hover { -fx-background-color: #244bb9; }
+.nav-button.active { -fx-background-color: #365fcd; -fx-text-fill: #ffffff; -fx-font-weight: bold; }
+.sidebar-footer { -fx-text-fill: #d4e2ed; -fx-padding: 0 10; }
+.sidebar-version { -fx-text-fill: #a6b9ca; -fx-font-size: 11px; -fx-padding: 0 10; }
+.workspace { -fx-padding: 28 30 20 30; }
+.truck-watermark {
+    -fx-background-image: url("../branding/best-trailers-truck.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: contain;
+}
+.page-title { -fx-font-size: 27px; -fx-font-weight: bold; -fx-text-fill: #172e46; }
+.subtitle { -fx-text-fill: #61758a; -fx-font-size: 12px; }
+.status-bar { -fx-background-color: #e7edf3; -fx-padding: 9 18; }
+.status-bar .label { -fx-font-size: 11px; -fx-text-fill: #3e566c; }
+.section { -fx-padding: 22 0 0 0; }
+.section-heading { -fx-font-size: 17px; -fx-font-weight: bold; }
+.card { -fx-background-color: white; -fx-background-radius: 11; -fx-padding: 20; -fx-border-color: #dfe6ed; -fx-border-radius: 11; }
+.card-label { -fx-text-fill: #60758a; -fx-font-size: 12px; }
+.card-value { -fx-font-size: 27px; -fx-font-weight: bold; -fx-text-fill: #193d52; }
+.card-note { -fx-text-fill: #60758a; -fx-font-size: 11px; }
+.table-view { -fx-background-color: white; -fx-border-color: #dce4ed; -fx-border-radius: 6; -fx-background-radius: 6; -fx-padding: 0; }
+.table-view .column-header-background, .table-view .column-header { -fx-background-color: #e8eef4; }
+.table-view .column-header .label { -fx-text-fill: #304b63; -fx-font-weight: bold; -fx-padding: 10 6; -fx-alignment: CENTER_LEFT; -fx-font-size: 12px; }
+.table-row-cell { -fx-cell-size: 39; -fx-background-color: white; -fx-border-color: transparent transparent #eff2f6 transparent; }
+.table-row-cell:odd { -fx-background-color: #f8fafc; }
+.table-row-cell:selected { -fx-background-color: #d7eaf2; }
+.table-row-cell:selected .text { -fx-fill: #173c53; }
+.table-cell { -fx-padding: 9 8; -fx-alignment: CENTER_LEFT; -fx-border-color: transparent; }
+.text-field, .combo-box, .date-picker, .text-area { -fx-background-radius: 6; -fx-border-radius: 6; }
+.text-field { -fx-padding: 9 10; }
+.text-area .content { -fx-background-color: white; }
+.notice { -fx-background-color: #edf3f7; -fx-background-radius: 8; -fx-padding: 16; -fx-text-fill: #3b5870; }
+.calculation-preview { -fx-background-color: #e8f2ef; -fx-padding: 15; -fx-background-radius: 8; -fx-text-fill: #245447; -fx-line-spacing: 5; }
+.dialog-pane { -fx-background-color: #f5f7fa; }
+.dialog-pane > .content.label { -fx-font-size: 13px; }
+.scroll-pane, .scroll-pane > .viewport { -fx-background-color: transparent; }
+.detail { -fx-font-size: 12px; }
+.equipment-sheet { -fx-padding: 12 0 0 0; }
+.equipment-sheet .section { -fx-padding: 8 4 12 0; }
+.selected-filter { -fx-background-color: #e4ebff; -fx-border-color: #9aafe8; -fx-text-fill: #193ba4; -fx-font-weight: bold; }
+.equipment-tile { -fx-alignment: CENTER_LEFT; -fx-padding: 15; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-width: 2; }
+.equipment-tile:focused { -fx-border-color: #2854d1; }
+.thermo-tile { -fx-background-color: #e5f2f3; -fx-border-color: #b0d3d6; }
+.thermo-tile:hover { -fx-background-color: #d6ebed; }
+.tractor-tile { -fx-background-color: #e8eef8; -fx-border-color: #bbcce5; }
+.tractor-tile:hover { -fx-background-color: #dae5f5; }
+.tile-type { -fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #31546b; }
+.tile-number { -fx-font-size: 25px; -fx-font-weight: bold; -fx-text-fill: #173b55; }
+.tile-detail { -fx-font-size: 11px; -fx-text-fill: #48677d; }
+.metric-value { -fx-font-weight: bold; -fx-text-fill: #21485d; }
+.positive-result { -fx-text-fill: #236441; }
+.negative-result { -fx-text-fill: #a63232; }
+.identity-card { -fx-padding: 12 18; }
+.fuel-panel { -fx-padding: 14 18; }
+.totals-metrics { -fx-padding: 3 0; }
+.ledger-total, .ledger-total:odd, .ledger-total:selected { -fx-background-color: #e4ebff; -fx-font-weight: bold; }
+.ledger-table .table-row-cell { -fx-cell-size: 49; }
+.ledger-table .table-cell { -fx-padding: 4 6; -fx-font-size: 12px; }
+.ledger-table .column-header { -fx-size: 60px; }
+.ledger-table .column-header > .label { -fx-padding: 4 5; }
+.ledger-table .column-header .label .label { -fx-padding: 2 0; }

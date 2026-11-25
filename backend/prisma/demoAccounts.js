@@ -4,7 +4,7 @@ import { hashPassword } from '../src/lib/security.js';
 
 export async function ensureDemoAccounts() {
   const accounts = [
-    { email: 'nestor@alis.dev', name: 'Néstor', username: 'ALIS', role: 'ADMIN' },
+    { email: 'ALIS@alis.dev', name: 'ALIS', username: 'ALIS', role: 'ADMIN' },
     { email: 'ness@alis.dev', name: 'Ness', username: 'Ness_ALIS', role: 'MEMBER' },
     { email: 'ana@alis.dev', name: 'Ana Morales', role: 'MEMBER' }
   ];

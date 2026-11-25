@@ -27,7 +27,7 @@ En producción, frontend y API necesitan HTTPS y pertenecer al mismo sitio para 
 - `GET /api/users` lista perfiles sin credenciales.
 - `POST /api/users` permite al administrador registrar miembros con contraseñas de 12 a 128 caracteres y `username` opcional de 3 a 32 letras, números o guiones bajos. El rol creado siempre es `MEMBER`.
 
-Los accesos locales configurados son `ALIS` para la cuenta ADMIN de `nestor@alis.dev` y `Ness_ALIS` para la cuenta MEMBER de `ness@alis.dev`. Los correos de contacto y las relaciones de proyectos se conservan. Las contraseñas rotadas no se guardan en este archivo. La cuenta `ana@alis.dev` mantiene acceso por correo. Las cuentas antiguas sin contraseña no permiten iniciar sesión hasta configurar sus credenciales.
+Los accesos locales configurados son `ALIS` para la cuenta ADMIN de `ALIS@alis.dev` y `Ness_ALIS` para la cuenta MEMBER de `ness@alis.dev`. El nombre mostrado del administrador es `ALIS`. El acceso por correo no distingue mayúsculas y la base impide correos duplicados por diferencias de capitalización. Las relaciones de proyectos se conservan y las contraseñas no se guardan en este archivo. La cuenta `ana@alis.dev` mantiene acceso por correo. Las cuentas antiguas sin contraseña no permiten iniciar sesión hasta configurar sus credenciales.
 
 ## Proyectos
 

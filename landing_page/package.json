@@ -1,0 +1,13 @@
+{
+  "name": "alis-landing-page",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Landing comercial de ALIS, sin dependencias externas.",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/serve.mjs --dist"
+  },
+  "engines": { "node": ">=20" }
+}

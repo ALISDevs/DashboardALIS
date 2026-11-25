@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; media-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102735">
+  <meta name="description" content="Aprende inglés A1 como parte de una expedición espacial. Seis misiones y una travesía final.">
+  <title>Bitácora Orbital | Inglés A1</title>
+  <link rel="icon" href="assets/emblema.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="motor.js" defer></script>
+  <script src="curso.js" defer></script>
+  <script src="entrenamiento.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 4v3"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M20 12H5m6-6-6 6 6 6"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="m13 2-9 12h7l-1 8 10-12h-7l1-8Z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 5v15M3 5c4-1 6-1 9 1 3-2 5-2 9-1v14c-4-1-6-1-9 1-3-2-5-2-9-1Z"/></symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24"><path d="m4 16-1 5 5-1L21 7l-4-4ZM14 6l4 4"/></symbol>
+    <symbol id="i-headphones" viewBox="0 0 24 24"><path d="M3 14v-3a9 9 0 0 1 18 0v3"/><rect x="3" y="12" width="5" height="8" rx="2"/><rect x="16" y="12" width="5" height="8" rx="2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+  </svg>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="topbar">
+    <div class="shell masthead">
+      <a class="brand" href="#inicio" aria-label="Bitácora Orbital, inicio">
+        <img src="assets/emblema.svg" alt="" width="38" height="38">
+        <strong>Bitácora Orbital</strong>
+      </a>
+      <span class="course-level">INGLÉS A1</span>
+    </div>
+    <nav class="nav" aria-label="Navegación principal">
+      <a href="#inicio" data-nav="inicio">Inicio</a>
+      <a href="#misiones" data-nav="misiones">Misiones</a>
+      <a href="#travesia" data-nav="travesia">Travesía final <svg class="icon" aria-hidden="true"><use id="final-nav-icon" href="#i-lock"/></svg></a>
+    </nav>
+  </header>
+
+  <main class="main" id="contenido" tabindex="-1">
+    <p class="shell empty-state">Abriendo la bitácora…</p>
+  </main>
+  <noscript><p class="shell">Activa JavaScript para consultar las misiones y el progreso.</p></noscript>
+
+  <footer class="footer">
+    <div class="shell footer-inner">
+      <strong>BITÁCORA ORBITAL</strong>
+      <span>Inglés A1 · Ilustraciones generadas para el curso</span>
+    </div>
+  </footer>
+
+  <dialog id="feedback" class="feedback" aria-labelledby="feedback-title" aria-describedby="feedback-copy">
+    <form method="dialog">
+      <button class="icon-button close" aria-label="Cerrar feedback"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+      <p class="eyebrow" id="feedback-character"></p>
+      <h2 id="feedback-title"></h2>
+      <p id="feedback-copy"></p>
+      <p id="feedback-answer" class="feedback-answer" lang="en"></p>
+      <button class="button" autofocus>Continuar</button>
+    </form>
+  </dialog>
+</body>
+</html>

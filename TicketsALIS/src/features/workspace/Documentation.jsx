@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { getDocuments, createDocument, updateDocument, exportDocuments } from '../../shared/api/tickets.js';
-import { Download, Save } from 'lucide-react';
+import { Download, Eye, Pencil, Save } from 'lucide-react';
 import { GlassCard } from '../../shared/ui/GlassCard.jsx';
+import { RichText } from '../../shared/ui/RichText.jsx';
 
 export function Documentation({ projects, onSaved }) {
   const [projectId, setProjectId] = useState(projects[0]?.id || '');
@@ -14,6 +15,7 @@ export function Documentation({ projects, onSaved }) {
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
   const [reloadKey, setReloadKey] = useState(0);
+  const [showPreview, setShowPreview] = useState(false);
 
   useEffect(() => {
     if (!projects.some((project) => project.id === projectId)) {
@@ -34,6 +36,7 @@ export function Documentation({ projects, onSaved }) {
       const first = data[0];
       setSelectedId(first?.id || '');
       setForm({ title: first?.title || '', content: first?.content || '' });
+      setShowPreview(Boolean(first));
       setDirty(false);
       setState('ready');
     }).catch((failure) => { if (!cancelled) { setError(failure.message); setState('error'); } });
@@ -50,6 +53,7 @@ export function Documentation({ projects, onSaved }) {
     const doc = documents.find((item) => item.id === id);
     setSelectedId(id);
     setForm({ title: doc?.title || '', content: doc?.content || '' });
+    setShowPreview(Boolean(doc));
     setDirty(false);
     setNotice('');
     setError('');
@@ -74,6 +78,7 @@ export function Documentation({ projects, onSaved }) {
       setSelectedId(saved.id);
       setForm({ title: saved.title, content: saved.content });
       setDirty(false);
+      setShowPreview(true);
       setNotice('Documento guardado. Ya está disponible para todo el equipo.');
       onSaved();
     } catch (failure) { setError(failure.message); }
@@ -100,7 +105,7 @@ export function Documentation({ projects, onSaved }) {
   const selected = documents.find((doc) => doc.id === selectedId);
   return (
     <GlassCard className="documentation-panel" hover={false}>
-      <div className="section-heading"><div><h2>Documentación del proyecto</h2><p className="muted-text">Notas compartidas en Markdown. Guarda tus cambios antes de exportar.</p></div>
+      <div className="section-heading"><div><h2>Documentación del proyecto</h2><p className="muted-text">Notas compartidas con el equipo. Guarda tus cambios antes de exportar.</p></div>
         <button className="secondary-button" onClick={download} disabled={!projectId || pending || dirty || state !== 'ready'}><Download size={15} aria-hidden="true" />Exportar todo en .md</button>
       </div>
       {!projects.length ? <p className="muted-text">Crea un proyecto para comenzar la documentación.</p> : <>
@@ -112,8 +117,9 @@ export function Documentation({ projects, onSaved }) {
         </div>
         {state === 'loading' && <p role="status">Cargando documentos...</p>}
         {state === 'ready' && <form className="ticket-form" onSubmit={save}>
-          <label>Título<input required maxLength={200} value={form.title} disabled={pending} onChange={(event) => edit('title', event.target.value)} placeholder="Ej. Arquitectura y decisiones técnicas" /></label>
-          <label>Contenido Markdown<textarea className="markdown-editor" value={form.content} disabled={pending} maxLength={200000} rows={16} onChange={(event) => edit('content', event.target.value)} placeholder={'# Documentación técnica\n\n## Arquitectura\n- Decisiones y acuerdos del equipo'} /></label>
+          <label>Título<input required maxLength={200} value={form.title} disabled={pending || showPreview} onChange={(event) => edit('title', event.target.value)} placeholder="Ej. Arquitectura y decisiones técnicas" /></label>
+          <div className="document-view-tabs" aria-label="Presentación del documento"><button type="button" className="secondary-button" aria-pressed={!showPreview} disabled={pending} onClick={() => setShowPreview(false)}><Pencil size={14} aria-hidden="true" />Editar</button><button type="button" className="secondary-button" aria-pressed={showPreview} disabled={pending} onClick={() => setShowPreview(true)}><Eye size={14} aria-hidden="true" />Vista de lectura</button></div>
+          {showPreview ? <section className="document-preview" aria-label="Contenido del documento">{form.content.trim() ? <RichText>{form.content}</RichText> : <p className="muted-text">El documento aún no tiene contenido.</p>}</section> : <label>Contenido<textarea className="markdown-editor" value={form.content} disabled={pending} maxLength={200000} rows={16} onChange={(event) => edit('content', event.target.value)} placeholder="Escribe las decisiones técnicas, acuerdos y notas del proyecto. Puedes usar texto normal o Markdown." /></label>}
           <div className="section-heading"><span className="muted-text">{dirty ? 'Cambios sin guardar' : selected ? `Última edición: ${selected.author.name} · ${new Date(selected.updatedAt).toLocaleString('es-MX')}` : 'Nuevo documento compartido'}</span><button className="primary-button" disabled={pending || !dirty}><Save size={15} aria-hidden="true" />{pending ? 'Procesando...' : 'Guardar documento'}</button></div>
         </form>}
       </>}

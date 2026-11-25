@@ -1,0 +1,12 @@
+/target/
+/.tools/
+/.m2/
+/.run/
+/dist/
+*.db
+*.db-shm
+*.db-wal
+*.log
+.idea/
+*.iml
+.vscode/

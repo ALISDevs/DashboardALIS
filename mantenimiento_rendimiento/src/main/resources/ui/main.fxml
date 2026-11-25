@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mx.mantenimientorendimiento.ui.MainController" fx:id="root">
+    <left>
+        <VBox styleClass="sidebar" prefWidth="232" spacing="8">
+            <HBox alignment="CENTER" styleClass="brand-logo">
+                <ImageView fitWidth="176" preserveRatio="true" smooth="true" accessibleText="Best Trailers">
+                    <image><Image url="@../branding/best-trailers-report.png"/></image>
+                </ImageView>
+            </HBox>
+            <Label text="Indicadores&#10;y Registros" styleClass="brand-name"/>
+            <Label text="CONTROL DE FLOTA" styleClass="sidebar-caption"/>
+            <Button fx:id="equipmentNav" text="Equipos registrados" onAction="#showEquipment" styleClass="nav-button" maxWidth="Infinity"/>
+            <Button fx:id="monthlyNav" text="Resumen mensual" onAction="#showMonthlySummary" styleClass="nav-button" maxWidth="Infinity"/>
+            <Button fx:id="totalNav" text="Resumen total" onAction="#showTotalSummary" styleClass="nav-button" maxWidth="Infinity"/>
+            <Button fx:id="operatorsNav" text="Operadores" onAction="#showOperators" styleClass="nav-button" maxWidth="Infinity"/>
+            <Button fx:id="auditNav" text="Bitácora" onAction="#showAudit" styleClass="nav-button" maxWidth="Infinity"/>
+            <Region VBox.vgrow="ALWAYS"/>
+            <Label text="Datos en esta laptop" styleClass="sidebar-footer"/>
+            <Label text="Versión 1.0.0" styleClass="sidebar-version"/>
+        </VBox>
+    </left>
+    <center>
+        <BorderPane fx:id="workspace" styleClass="workspace" minHeight="0">
+            <top>
+                <VBox spacing="18">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <VBox spacing="4" HBox.hgrow="ALWAYS"><Label fx:id="pageTitle" text="Indicadores y Registros" styleClass="page-title"/><Label fx:id="pageSubtitle" text="Combustible por equipo y mes" styleClass="subtitle" wrapText="true"/></VBox>
+                        <Button text="Importar historial" onAction="#importExcel" styleClass="primary-button"/>
+                        <Button text="Respaldar" onAction="#backup"/>
+                    </HBox>
+                    <Separator/>
+                </VBox>
+            </top>
+            <center>
+                <StackPane minHeight="0">
+                    <Region styleClass="truck-watermark" opacity="0.13" mouseTransparent="true"/>
+                    <StackPane fx:id="content" minHeight="0"/>
+                </StackPane>
+            </center>
+        </BorderPane>
+    </center>
+    <bottom>
+        <HBox spacing="10" styleClass="status-bar" alignment="CENTER_LEFT">
+            <ProgressIndicator fx:id="progress" visible="false" managed="false" prefWidth="16" prefHeight="16"/>
+            <Label fx:id="statusLabel" text="Abriendo base de datos…" HBox.hgrow="ALWAYS"/>
+            <Label fx:id="storageLabel"/>
+        </HBox>
+    </bottom>
+</BorderPane>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { RichText } from '../../../shared/ui/RichText.jsx';
 
 export function TicketDetailModal({ ticket, onClose, isAdmin, users = [], onAssign }) {
   const [pending, setPending] = useState(false);
@@ -25,7 +26,7 @@ export function TicketDetailModal({ ticket, onClose, isAdmin, users = [], onAssi
           </div>
           <button type="button" className="icon-button" onClick={onClose}>Cerrar</button>
         </header>
-        <p className="ticket-description">{ticket.description || 'Sin descripción adicional.'}</p>
+        <RichText className="ticket-description">{ticket.description || 'Sin descripción adicional.'}</RichText>
         {isAdmin && <label className="status-control">Responsable<select value={ticket.assignedUserId || ''} disabled={pending} onChange={(event) => assign(event.target.value)}><option value="">Sin asignar</option>{users.map((user) => <option key={user.id} value={user.id}>{user.name}</option>)}</select></label>}
         {error && <p className="form-error" role="alert">{error}</p>}
         <section className="ticket-comments" aria-label="Comentarios del ticket">
@@ -34,7 +35,7 @@ export function TicketDetailModal({ ticket, onClose, isAdmin, users = [], onAssi
           {ticket.comments.map((comment) => (
             <article className="internal-comment" key={comment.id}>
               <strong>{comment.client?.name || comment.user?.name || 'Equipo ALIS'}</strong>
-              <p>{comment.body}</p>
+              <RichText className="comment-body" headingOffset={3}>{comment.body}</RichText>
             </article>
           ))}
         </section>

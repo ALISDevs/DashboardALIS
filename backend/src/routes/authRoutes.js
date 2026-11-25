@@ -30,7 +30,7 @@ router.post('/login', async (req, res, next) => {
       return res.status(400).json({ message: 'Introduce un usuario o correo y una contraseña válidos.' });
     }
     const user = identifier.includes('@')
-      ? await prisma.user.findUnique({ where: { email: identifier.toLowerCase() } })
+      ? await prisma.user.findFirst({ where: { email: { equals: identifier, mode: 'insensitive' } } })
       : await prisma.user.findFirst({ where: { username: { equals: identifier, mode: 'insensitive' } } });
     if (!(await verifyPassword(password, user?.passwordHash))) {
       return res.status(401).json({ message: 'Usuario o contraseña incorrectos.' });

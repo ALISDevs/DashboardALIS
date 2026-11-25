@@ -13,7 +13,7 @@ const tickets = [
     priority: 'HIGH',
     status: 'NEW',
     isVisibleToClient: false,
-    assigneeEmail: 'nestor@alis.dev'
+    assigneeEmail: 'ALIS@alis.dev'
   },
   {
     title: 'Integrar autenticación del portal',
@@ -31,7 +31,7 @@ const tickets = [
     priority: 'MEDIUM',
     status: 'RESOLVED',
     isVisibleToClient: true,
-    assigneeEmail: 'nestor@alis.dev'
+    assigneeEmail: 'ALIS@alis.dev'
   },
   {
     title: 'Optimizar carga de reportes',
@@ -117,17 +117,17 @@ async function upsertTicket(ticket, projectId, usersByEmail) {
 
 async function seed() {
   await ensureDemoAccounts();
-  const nestor = await prisma.user.upsert({
+  const admin = await prisma.user.upsert({
     where: {
-      email: 'nestor@alis.dev'
+      email: 'ALIS@alis.dev'
     },
     update: {
-      name: 'Néstor',
+      name: 'ALIS',
       role: 'ADMIN'
     },
     create: {
-      name: 'Néstor',
-      email: 'nestor@alis.dev',
+      name: 'ALIS',
+      email: 'ALIS@alis.dev',
       role: 'ADMIN'
     }
   });
@@ -163,10 +163,10 @@ async function seed() {
   });
 
   const project = await upsertProject(client.id);
-  await prisma.project.update({ where: { id: project.id }, data: { createdById: nestor.id } });
-  await prisma.projectMember.createMany({ data: [nestor, ana].map((user) => ({ projectId: project.id, userId: user.id })), skipDuplicates: true });
+  await prisma.project.update({ where: { id: project.id }, data: { createdById: admin.id } });
+  await prisma.projectMember.createMany({ data: [admin, ana].map((user) => ({ projectId: project.id, userId: user.id })), skipDuplicates: true });
   const usersByEmail = new Map([
-    [nestor.email, nestor],
+    [admin.email, admin],
     [ana.email, ana]
   ]);
 
